@@ -13,17 +13,17 @@ except Exception as e:
     print(f"Error loading CSV: {e}")
     exit()
 
-# --- 1. Feature Engineering ---
+# 1. Feature Engineering
 
 # Create the binary target variable 'pass_status'
-# We define passing as a final grade (G3) of 10 or higher.
+# define passing as a final grade (G3) of 10 or higher.
 df['pass_status'] = (df['G3'] >= 10).astype(int)  # 1 for Pass, 0 for Fail
 
 # Encode the 'higher' variable (yes/no) into numerical format (1/0)
 le = LabelEncoder()
 df['higher_encoded'] = le.fit_transform(df['higher'])
 
-# --- 2. Define Features (X) and Target (y) ---
+# 2. Define Features (X) and Target (y)
 
 # We choose 3 independent variables based on the EDA:
 # failures: Strong negative correlation with grades.
@@ -33,18 +33,18 @@ features = ['failures', 'goout', 'higher_encoded']
 X = df[features]
 y = df['pass_status']
 
-# --- 3. Split Data into Training and Testing Sets ---
+# 3. Split Data into Training and Testing Sets 
 # 80% for training, 20% for testing. random_state ensures reproducibility.
 X_train, X_test, y_train, y_test = train_test_split(
     X, y, test_size=0.2, random_state=42, stratify=y
 )
 
-# --- 4. Train the Classification Model ---
+# 4. Train the Classification Model
 # We will use Logistic Regression, a standard and interpretable classification algorithm.
 model = LogisticRegression(random_state=42)
 model.fit(X_train, y_train)
 
-# --- 5. Evaluate the Model ---
+# 5. Evaluate the Model
 
 # Make predictions on the test data
 y_pred = model.predict(X_test)
@@ -69,5 +69,6 @@ plt.ylabel('Label Aktual', fontsize=12)
 plt.xlabel('Label Prediksi', fontsize=12)
 plt.savefig('confusion_matrix.png')
 plt.close()
+
 
 print("\nClassification analysis complete. confusion_matrix.png has been generated.")
