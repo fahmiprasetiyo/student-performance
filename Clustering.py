@@ -41,7 +41,6 @@ plt.savefig('elbow_method.png')
 plt.close()
 
 # 4. Perform K-Means Clustering with the optimal K
-# Based on the elbow plot, K=4 seems like a reasonable choice.
 optimal_k = 4
 kmeans = KMeans(n_clusters=optimal_k, init='k-means++', random_state=42, n_init=10)
 cluster_labels = kmeans.fit_predict(X_scaled)
@@ -64,5 +63,6 @@ plt.close()
 print("--- Analisis Karakteristik Cluster ---")
 cluster_analysis = df.groupby('cluster')[features].mean().round(2)
 print(cluster_analysis)
+
 
 print("\nClustering visualizations have been generated and saved as PNG files.")
