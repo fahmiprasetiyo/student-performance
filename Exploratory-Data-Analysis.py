@@ -18,7 +18,7 @@ except Exception as e:
 sns.set_style("whitegrid")
 plt.rcParams['figure.figsize'] = (10, 6)
 
-# --- Initial Data Inspection ---
+# Data Inspection
 print("--- Data Info ---")
 df.info()
 print("\n--- Descriptive Statistics ---")
@@ -92,7 +92,6 @@ plt.savefig('internet_vs_g3.png')
 plt.close()
 
 # 8. Correlation Heatmap
-# Select only numeric columns for correlation matrix
 numeric_cols = df.select_dtypes(include=['int64', 'float64']).columns
 plt.figure(figsize=(18, 15))
 correlation_matrix = df[numeric_cols].corr()
@@ -103,5 +102,6 @@ plt.yticks(rotation=0)
 plt.tight_layout()
 plt.savefig('correlation_heatmap.png')
 plt.close()
+
 
 print("\nEDA visualizations have been generated and saved as PNG files.")
