@@ -54,7 +54,7 @@ scatter = sns.scatterplot(
     x='absences',
     y='studytime',
     hue='cluster',
-    palette='bright', # Using a valid palette
+    palette='bright',
     s=100,
     alpha=0.7,
     edgecolor='k'
@@ -71,9 +71,10 @@ plt.close()
 
 # Print cluster centers to help with interpretation
 print("Cluster centers (in original scale):")
-# We need to inverse_transform the scaled centers to interpret them
+
 cluster_centers = scaler.inverse_transform(kmeans.cluster_centers_)
 cluster_info = pd.DataFrame(cluster_centers, columns=features)
 print(cluster_info)
+
 
 print("\nClustering analysis complete. elbow_method.png and student_clusters.png have been generated.")
