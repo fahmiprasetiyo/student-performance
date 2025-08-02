@@ -2,12 +2,12 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
 
-# Load the dataset with the correct separator
+# Load the dataset
 try:
     df = pd.read_csv('student-mat.csv', sep=';')
 except Exception as e:
     print(f"Error loading CSV: {e}")
-    # As a fallback, try with a comma separator if the semicolon fails
+    
     try:
         df = pd.read_csv('student-mat.csv')
         print("Semicolon separator failed, but comma separator worked.")
@@ -20,7 +20,7 @@ except Exception as e:
 sns.set_style("whitegrid")
 plt.rcParams['figure.figsize'] = (10, 6)
 
-# --- Initial Data Inspection ---
+# Data Inspection
 print("--- Data Info ---")
 df.info()
 print("\n--- Descriptive Statistics ---")
@@ -29,7 +29,7 @@ print("\n--- First 5 Rows ---")
 print(df.head())
 
 
-# --- Visualizations ---
+#Visualizations
 
 # 1. Distribution of Final Grades (G3)
 plt.figure(figsize=(12, 6))
@@ -95,7 +95,7 @@ plt.savefig('internet_vs_g3.png')
 plt.close()
 
 # 8. Correlation Heatmap
-# Select only numeric columns for correlation matrix
+\
 numeric_cols = df.select_dtypes(include=['int64', 'float64']).columns
 plt.figure(figsize=(18, 15))
 correlation_matrix = df[numeric_cols].corr()
@@ -106,5 +106,6 @@ plt.yticks(rotation=0)
 plt.tight_layout()
 plt.savefig('correlation_heatmap.png')
 plt.close()
+
 
 print("\nEDA visualizations have been generated and saved as PNG files.")
